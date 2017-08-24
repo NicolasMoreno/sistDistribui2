@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+//option java_outer_classname = "HelloWorldProto";
+//option java_package = "io.grpc.examples.helloworld";
+option objc_class_prefix = "ISV";
+
+package itemservices;
+
+// the itemServices service definition
+service ItemServices {
+
+    // add item to wishList
+    rpc addItem (Item) returns (AddedReply) {}
+
+    //lists all items given the user name
+    rpc listItems (User) returns (stream ItemReply) {}
+
+}
+
+/*message Item {
+    string itemName = 1;
+}*/
+message User {
+    string user = 1;
+}
+
+message Item {
+    string user = 1;
+    string item = 2;
+}
+
+message ItemReply {
+    string itemName = 1;
+}
+
+message AddedReply {
+    string message = 1;
+}
+
+
+
+
+
+
+
