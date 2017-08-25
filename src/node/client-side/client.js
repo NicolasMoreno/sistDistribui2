@@ -8,16 +8,57 @@ var client = new item_service.ItemServices('localhost:50051',
 
 function main() {
 
-    client.addItem({user: 'Nicolas', item: 'kemepasa'}, function (err, response) {
-        console.log(response.message);
+    // populateData();
+    // getItems('Nicolas');
+    // removeItem({user: 'Nicolas', item: 'Doritos'});
+
+}
+
+/**
+ * Function that calls to the server to list all the items of an specified user
+ * @param user
+ * @param callback
+ */
+function getItems(user) {
+    var call = client.listItems(user);
+    call.on('data', function (item) {
+        console.log('List: ' + item.itemName)
     });
-    client.listItems('Nicolas', function (err, response) {
-        console.log('list: ' + response.itemName);
+    call.on('end', function () {
+        console.log("Finished listing items");
+    })
+}
+
+/**
+ * Function that calls to the server to remove an specific item of the list.
+ * @param item
+ */
+function removeItem(item) {
+    client.removeItem(item, function (err, response) {
+        console.log(response.message);
     });
 }
 
-function getItems(user, callback) {
-    client.listItems({user: user}, callback);
+function populateData() {
+    client.addItem({user: 'Nicolas', item: 'Palitossh'}, function (err, response) {
+        console.log(response.message);
+    });
+    client.addItem({user: 'Nicolas', item: 'Doritos'}, function (err, response) {
+        console.log(response.message);
+    });
+    client.addItem({user: 'Nicolas', item: 'Cheddar'}, function (err, response) {
+        console.log(response.message);
+    });
+    client.addItem({user: 'Nicolas', item: 'Pizza'}, function (err, response) {
+        console.log(response.message);
+    });
+    client.addItem({user: 'Nicolas', item: 'Cerveza'}, function (err, response) {
+        console.log(response.message);
+    });
+    client.addItem({user: 'Nicolas', item: 'Coca-Cola'}, function (err, response) {
+        console.log(response.message);
+    });
 }
+
 
 main();
