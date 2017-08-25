@@ -1,5 +1,5 @@
 {
-  "name": "server-side-node",
+  "name": "client-side-node",
   "version": "0.0.1",
   "scripts": {
     "run": "node client-side/client.js"

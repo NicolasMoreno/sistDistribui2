@@ -6,5 +6,3 @@ src/node/extension_binary/
 # IDE specific folder for JetBrains IDEs
 .idea/
 
-.DS_Store
-
