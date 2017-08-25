@@ -12,7 +12,6 @@ var items = [];
  * Function that adds an item element in the item array
  */
 function addItem(call,callback) {
-    // console.log(call.request.item);
     items.push({user: call.request.user, item: call.request.item});
     callback(null, {message: 'added item ' + items.length});
 }
@@ -35,7 +34,6 @@ function getItems(call) {
  */
 function removeItem(call, callback) {
     const item = {user: call.request.user, item: call.request.item};
-    console.log("deleting item " + JSON.stringify(item) );
     var auxItemArray = items;
     items = items.filter( function (innerItem) {
         return !(innerItem.user === item.user && innerItem.item === item.item);
@@ -59,7 +57,3 @@ function main() {
 
 main();
 
-/*
-function getItems(call, callback) {
-
-}*/

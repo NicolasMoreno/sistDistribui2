@@ -1,6 +1,9 @@
 {
-  "name": "client-side-node",
+  "name": "server-side-node",
   "version": "0.0.1",
+  "scripts": {
+    "run": "node client-side/client.js"
+  },
   "dependencies": {
     "async": "^1.5.2",
     "google-protobuf": "^3.0.0",
