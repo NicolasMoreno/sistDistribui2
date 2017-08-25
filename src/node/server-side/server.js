@@ -20,13 +20,30 @@ function addItem(call,callback) {
 /**
  * function that lists all items given the username
  */
-function getItems(call,callback) {
+function getItems(call) {
     var userName = call.request.user;
     _.each(items, function (item) {
         if(item.user === userName){
-            callback(null, item.item);
+            call.write(item.item);
         }
     });
+    call.end();
+}
+
+/**
+ * Function that removes an item given the Item.
+ */
+function removeItem(call, callback) {
+    const item = {user: call.request.user, item: call.request.item};
+    console.log("deleting item " + JSON.stringify(item) );
+    var auxItemArray = items;
+    items = items.filter( function (innerItem) {
+        return !(innerItem.user === item.user && innerItem.item === item.item);
+    });
+    if(items === auxItemArray){
+       callback(null, {message: "No item deleted"});
+    }else callback(null, {message: "Item deleted successfully = " + item.item});
+
 }
 
 /**
@@ -35,7 +52,7 @@ function getItems(call,callback) {
  */
 function main() {
     var server = new grpc.Server();
-    server.addProtoService(item_proto.ItemServices.service, {addItem: addItem, listItems: getItems});
+    server.addProtoService(item_proto.ItemServices.service, {addItem: addItem, listItems: getItems, removeItem: removeItem});
     server.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure());
     server.start();
 }

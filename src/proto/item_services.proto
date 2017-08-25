@@ -10,11 +10,14 @@ package itemservices;
 // the itemServices service definition
 service ItemServices {
 
-    // add item to wishList
-    rpc addItem (Item) returns (AddedReply) {}
+    //Add item to wishList
+    rpc addItem (Item) returns (Reply) {}
 
-    //lists all items given the user name
+    //Lists all items given the user name
     rpc listItems (User) returns (stream ItemReply) {}
+
+    //Remove item from the list given user and item.
+    rpc removeItem(Item) returns (Reply) {}
 
 }
 
@@ -34,7 +37,7 @@ message ItemReply {
     string itemName = 1;
 }
 
-message AddedReply {
+message Reply {
     string message = 1;
 }
 
