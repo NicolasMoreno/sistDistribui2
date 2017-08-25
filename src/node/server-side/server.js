@@ -6,7 +6,18 @@ var item_proto = grpc.load(PROTO_PATH).itemservices;
 /**
  * List of items whishlisted from the users
  */
-var items = [];
+var items = [
+    {user: 'Nicolas', item: 'Palitossh'},
+    {user: 'Nicolas', item: 'Doritos'},
+    {user: 'Nicolas', item: 'Cheddar'},
+    {user: 'Nicolas', item: 'Cerveza'},
+    {user: 'Nicolas', item: 'Pizza'},
+    {user: 'Nicolas', item: 'Coca-cola'},
+    {user: 'Pepe', item: 'Doritos'},
+    {user: 'Pepe', item: 'Cheddar'},
+    {user: 'Pepa', item: 'Palitossh'},
+    {user: 'Pepa', item: 'Cerveza'}
+];
 
 /**
  * Function that adds an item element in the item array
