@@ -14,7 +14,7 @@ service ItemServices {
     rpc addItem (Item) returns (Reply) {}
 
     //Lists all items given the user name
-    rpc listItems (User) returns (stream ItemReply) {}
+    rpc listItems (User) returns (stream Reply) {}
 
     //Remove item from the list given user and item.
     rpc removeItem(Item) returns (Reply) {}
@@ -31,10 +31,6 @@ message User {
 message Item {
     string user = 1;
     string item = 2;
-}
-
-message ItemReply {
-    string itemName = 1;
 }
 
 message Reply {
