@@ -12,7 +12,7 @@ function main() {
 
 
     // populateData();
-    // getItems('Pepa');
+    // getItems('Nicolas');
     // removeItem({user: 'Nicolas', item: 'Doritos'});
 }
 
@@ -22,8 +22,8 @@ function main() {
  */
 function getItems(user) {
     var call = client.listItems(user);
-    call.on('data', function (item) {
-        console.log('List: ' + item.itemName)
+    call.on('data', function (reply) {
+        console.log('List: ' + reply.message)
     });
     call.on('end', function () {
         console.log("Finished listing items");
