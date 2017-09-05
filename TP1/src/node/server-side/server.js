@@ -19,6 +19,7 @@ var items = [
     {user: 'Pepa', item: 'Cerveza'}
 ];
 
+
 /**
  * Function that adds an item element in the item array
  */

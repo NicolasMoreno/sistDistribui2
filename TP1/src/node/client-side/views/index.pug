@@ -1,0 +1,17 @@
+html
+    head
+        title= title
+        script.
+            addNow = function () {
+                var user = {user: 'Nicolas', item: 'Palitoh'}
+                console.log(user);
+            }
+            printValue = function (e) {
+                var inputValue = e.target.value;
+                console.log(inputValue);
+            }
+    body
+        h1= message
+        .form-container
+            input(type=text, placeholder="Ingrese su nombre", value=inputValue, onchange='printValue($event)' )
+            button(type=submit, onclick='addNow()') Console!

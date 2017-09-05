@@ -3,13 +3,15 @@ const PROTO_PATH = __dirname + '/../../proto/item_services.proto';
 const grpc = require('grpc');
 const item_service = grpc.load(PROTO_PATH).itemservices;
 const readline = require('readline'); //Tratando de hacer un user input
-var client = new item_service.ItemServices('localhost:50051',
+var server = new item_service.ItemServices('localhost:50051',
     grpc.credentials.createInsecure());
 
-var userName; // Save the username on memory.
+const express = require('express');
+const app = express();
+app.set('views', './client-side/views');
+app.set('view engine', 'pug');
 
 function main() {
-
 
     // populateData();
     // getItems('Nicolas');
@@ -21,7 +23,7 @@ function main() {
  * @param user user to get all elements
  */
 function getItems(user) {
-    var call = client.listItems(user);
+    var call = server.listItems(user);
     call.on('data', function (reply) {
         console.log('List: ' + reply.message)
     });
@@ -35,7 +37,7 @@ function getItems(user) {
  * @param item to remove
  */
 function removeItem(item) {
-    client.removeItem(item, function (err, response) {
+    server.removeItem(item, function (err, response) {
         console.log(response.message);
     });
 }
@@ -45,11 +47,18 @@ function removeItem(item) {
  * @param item to add
  */
 function addItem(item) {
-    client.addItem(item, function (err, response) {
+    server.addItem(item, function (err, response) {
         console.log(response.message);
     })
 }
 
+app.get('/', function (req, res) {
+    res.render('index', { title: 'Hey', message: 'Hello there!', add: addItem, removeItem: removeItem, getItems: getItems })
+});
+
+app.listen(3000, function () {
+    console.log('Example app listening on port 3000!')
+});
 
 function populateData() {
     addItem({user: 'Nicolas', item: 'Palitossh'});
@@ -59,6 +68,5 @@ function populateData() {
     addItem({user: 'Nicolas', item: 'Cerveza'});
     addItem({user: 'Nicolas', item: 'Coca-Cola'});
 }
-
 
 main();
