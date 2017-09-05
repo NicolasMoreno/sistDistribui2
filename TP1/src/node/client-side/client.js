@@ -1,8 +1,6 @@
-
 const PROTO_PATH = __dirname + '/../../proto/item_services.proto';
 const grpc = require('grpc');
 const item_service = grpc.load(PROTO_PATH).itemservices;
-const readline = require('readline'); //Tratando de hacer un user input
 var server = new item_service.ItemServices('localhost:50051',
     grpc.credentials.createInsecure());
 

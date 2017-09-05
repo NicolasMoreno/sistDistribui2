@@ -1,7 +1,7 @@
 var PROTO_PATH = __dirname + '/../../proto/item_services.proto';
 var grpc = require('grpc');
 var _ = require('lodash');
-var item_proto = grpc.load(PROTO_PATH).itemservices;
+var routeguide = grpc.load(PROTO_PATH).itemservices;
 
 /**
  * List of items whishlisted from the users
@@ -60,12 +60,15 @@ function removeItem(call, callback) {
  * Starts an RPC server that receives requests for the Greeter service at the
  * sample server port
  */
-function main() {
+function getServer() {
     var server = new grpc.Server();
-    server.addProtoService(item_proto.ItemServices.service, {addItem: addItem, listItems: getItems, removeItem: removeItem});
-    server.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure());
-    server.start();
+    server.addProtoService(routeguide.ItemServices.service, {
+        addItem: addItem,
+        getItems: getItems,
+        removeItem: removeItem
+    });
+    return server;
 }
-
-main();
-
+var routeServer = getServer();
+routeServer.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure());
+routeServer.start();

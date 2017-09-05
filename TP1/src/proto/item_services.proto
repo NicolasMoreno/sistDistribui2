@@ -18,7 +18,6 @@ service ItemServices {
 
     //Remove item from the list given user and item.
     rpc removeItem(Item) returns (Reply) {}
-
 }
 
 /*message Item {

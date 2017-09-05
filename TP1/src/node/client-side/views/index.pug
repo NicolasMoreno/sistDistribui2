@@ -1,13 +1,11 @@
 html
     head
         title= title
-        script.
-            addNow = function () {
-                var user = {user: 'Nicolas', item: 'Palitoh'}
-                //llama 2 veces add(user) por alguna puta razon y cuando le doy click no lo hace
-            }
+        script
+            include script.js
+
     body
         h1= message
         .form-container
-            input(type=text, placeholder="Ingrese su nombre", value=inputValue, onchange='printValue($event)' )
-            button(type=submit, (click)="add({user: 'Nicolas', item: 'Palitoh'})" ) Console!
+            //input(type=text, placeholder="Ingrese su nombre", value=inputValue, onchange='printValue($event)' )
+            button(type=submit, onclick ="addNow()" ) Console!
