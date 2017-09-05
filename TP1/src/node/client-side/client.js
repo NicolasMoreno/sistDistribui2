@@ -53,7 +53,7 @@ function addItem(item) {
 }
 
 app.get('/', function (req, res) {
-    res.render('index', { title: 'Hey', message: 'Hello there!', add: addItem, removeItem: removeItem, getItems: getItems })
+    res.render('index', { title: 'Hey', message: 'Hello there!', add : addItem})
 });
 
 app.listen(3000, function () {
