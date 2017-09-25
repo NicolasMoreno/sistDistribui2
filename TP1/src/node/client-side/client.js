@@ -1,5 +1,6 @@
 const PROTO_PATH = __dirname + '/../../proto/item_services.proto';
 const grpc = require('grpc');
+const promise = require('promise');
 const item_service = grpc.load(PROTO_PATH).itemservices;
 var server = new item_service.ItemServices('localhost:50051', grpc.credentials.createInsecure());
 
@@ -15,13 +16,20 @@ module.exports = {
          * @param user user to get all elements
          */
     getItems: function(user) {
-        var call = server.listItems(user);
-        call.on('data', function (reply) {
-            console.log('List: ' + reply.message)
+        return new Promise(function (resolve, reject) {
+            let items = [];
+            if(user !== ''){
+                let call = server.listItems(user);
+                call.on('data', function (reply) {
+                    // console.log('List: ' + reply.message);
+                    items.push(reply.message);
+                });
+                call.on('end', function () {
+                    console.log("Finished listing items");
+                    resolve(items);
+                });
+            }else reject('No user sent');
         });
-        call.on('end', function () {
-            console.log("Finished listing items");
-        })
     },
 
     /**

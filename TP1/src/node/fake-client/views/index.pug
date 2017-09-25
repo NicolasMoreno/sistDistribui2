@@ -1,6 +1,6 @@
 html
     head
-        title = title
+        title = 'Hola Hola'
         script
             include script.js
         script(src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
@@ -8,5 +8,15 @@ html
     body
         h1= message
         .form-container
-            //input(type=text, placeholder="Ingrese su nombre", value=inputValue, onchange='printValue($event)' )
-            button(type=submit, onclick ="addNow()" ) Console!
+            input(type=text, placeholder="Set your Username", name='name' )
+            button(type=submit, onclick ="setUserName()" ) Add User Name
+
+        .add-item-container
+            input(type=text, placeholder="Add an item", name='itemName' )
+            button(type=submit, onclick='listItems()') addItem!
+        .user-items
+            ul
+                each item in {userItems}
+                    li= item
+
+
