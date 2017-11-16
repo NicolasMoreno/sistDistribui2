@@ -32,7 +32,6 @@ function addItem(call,callback) {
  * function that lists all items given the username
  */
 function getItems(call) {
-    console.log("estoy en el server");
     var userName = call.request.user;
     _.each(items, function (item) {
         if(item.user === userName){

@@ -10,10 +10,11 @@ html
         .form-container
             input(type=text, placeholder="Set your Username", name='name' )
             button(type=submit, onclick ="setUserName()" ) Add User Name
-
         .add-item-container
             input(type=text, placeholder="Add an item", name='itemName' )
-            button(type=submit, onclick='listItems()') addItem!
+            button(type=submit, onclick='addItem()') addItem!
+        .list-item-container
+            button(onclick='listItems()') listItems!
         .user-items
             ul
                 each item in {userItems}

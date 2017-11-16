@@ -8,7 +8,7 @@ var fakeClient = require('./routes/client-routes');
 var index = require('./routes/index');
 
 app.use('/', index);
-app.use('/fake', fakeClient);
+app.use('/api', fakeClient);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

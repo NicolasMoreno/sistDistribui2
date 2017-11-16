@@ -8,7 +8,7 @@ setUserName = function() {
 
 listItems = function () {
     $.ajax({
-        url : "/fake/items/get/" +userName,
+        url : "/api/items/get/" +userName,
         type: "GET",
         success: function(items){
             console.log('items', items);
@@ -19,5 +19,11 @@ listItems = function () {
 
 addItem = function () {
     let itemName = document.getElementsByName('itemName')[0].value;
-
+    $.ajax({
+        url: "/api/items/add?"+"user="+userName+"&item="+itemName,
+        type: "GET",
+        success: function (item) {
+            console.log("added", item);
+        }
+    })
 };
