@@ -1,23 +1,21 @@
 html
     head
-        title = 'Hola Hola'
+        title TP1
         script
             include script.js
         script(src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
 
     body
-        h1= message
         .form-container
             input(type=text, placeholder="Set your Username", name='name' )
-            button(type=submit, onclick ="setUserName()" ) Add User Name
+            button(type=submit, onclick ="setUserName()" ) Add username
         .add-item-container
-            input(type=text, placeholder="Add an item", name='itemName' )
-            button(type=submit, onclick='addItem()') addItem!
+            input(type=text, placeholder="Item", name='itemName' )
+        button(type=submit, onclick='addItem()') Add item
+        button(type=submit, onclick='removeItem()') Remove item
+
         .list-item-container
-            button(onclick='listItems()') listItems!
-        .user-items
-            ul
-                each item in {userItems}
-                    li= item
+            button(onclick='listItems()') List items!
 
-
+        div(id="items")
+            ul(id="list")

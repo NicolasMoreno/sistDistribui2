@@ -1,4 +1,4 @@
-var client = require('../client-side/client');
+const client = require('../client-side/client');
 
 module.exports = {
       getItems: function (req, res, next) {
@@ -20,6 +20,18 @@ module.exports = {
       },
 
       deleteItem: function (req, res, next) {
-
+          let item = {user: req.query.user, item: req.query.item};
+          client.removeItem(item)
+              .then(function (bool) {
+                  console.log("bool = " + bool);
+                  if(bool) {
+                    res.send(item);
+                  } else {
+                    res.send({message: "No item deleted"});
+                  }
+              })
+              .catch(err => {
+                  console.log(err)
+              });
       }
 };

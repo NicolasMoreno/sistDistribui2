@@ -1,7 +1,7 @@
-var PROTO_PATH = __dirname + '/../../proto/item_services.proto';
-var grpc = require('grpc');
-var _ = require('lodash');
-var routeguide = grpc.load(PROTO_PATH).itemservices;
+const PROTO_PATH = __dirname + '/../../proto/item_services.proto';
+const grpc = require('grpc');
+const _ = require('lodash');
+const itemservices = grpc.load(PROTO_PATH).itemservices;
 
 /**
  * List of items whishlisted from the users
@@ -19,11 +19,10 @@ var items = [
     {user: 'Pepa', item: 'Cerveza'}
 ];
 
-
 /**
  * Function that adds an item element in the item array
  */
-function addItem(call,callback) {
+function addItem(call, callback) {
     items.push({user: call.request.user, item: call.request.item});
     callback(null, {message: 'added item ' + items.length});
 }
@@ -32,9 +31,9 @@ function addItem(call,callback) {
  * function that lists all items given the username
  */
 function getItems(call) {
-    var userName = call.request.user;
+    const userName = call.request.user;
     _.each(items, function (item) {
-        if(item.user === userName){
+        if(item.user === userName) {
             call.write(item.item);
         }
     });
@@ -42,18 +41,17 @@ function getItems(call) {
 }
 
 /**
- * Function that removes an item given the Item.
+ * Function that removes an item given the Item object.
  */
 function removeItem(call, callback) {
     const item = {user: call.request.user, item: call.request.item};
-    var auxItemArray = items;
-    items = items.filter( function (innerItem) {
+    const auxItemArray = items;
+    items = items.filter(function (innerItem) {
         return !(innerItem.user === item.user && innerItem.item === item.item);
     });
-    if(items === auxItemArray){
+    if(items.length === auxItemArray.length){
        callback(null, {message: "No item deleted"});
     }else callback(null, {message: "Item deleted successfully = " + item.item});
-
 }
 
 /**
@@ -61,8 +59,8 @@ function removeItem(call, callback) {
  * sample server port
  */
 function getServer() {
-    var server = new grpc.Server();
-    server.addProtoService(routeguide.ItemServices.service, {
+    const server = new grpc.Server();
+    server.addService(itemservices.ItemServices.service, {
         addItem: addItem,
         listItems: getItems,
         removeItem: removeItem

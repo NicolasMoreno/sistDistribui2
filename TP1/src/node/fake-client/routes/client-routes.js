@@ -1,8 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var fakeClient = require('../controller');
+const express = require('express');
+const router = express.Router();
+const fakeClient = require('../controller');
 
 router.get('/items/get/:user', fakeClient.getItems);
 router.get('/items/add/', fakeClient.addItem);
+router.get('/items/remove/', fakeClient.deleteItem);
 
-module.exports = router
+module.exports = router;
